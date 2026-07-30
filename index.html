@@ -41,6 +41,7 @@
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
       color: var(--text-primary);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
@@ -170,6 +171,13 @@
     }
 
     /* ===== MAIN CONTENT ===== */
+    .main {
+      margin-left: 260px;
+      flex: 1;
+      min-height: 100vh;
+      background: var(--bg-primary);
+    }
+
     .container {
       max-width: 1100px;
       margin: 0 auto;
@@ -180,6 +188,7 @@
     .hero {
       padding: 6rem 0 4rem;
       position: relative;
+      background: var(--bg-primary);
     }
 
     .hero-content {
@@ -299,7 +308,7 @@
       margin-top: 0.8rem;
     }
 
-    /* ===== ABOUT (two columns) ===== */
+    /* ===== ABOUT ===== */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -572,7 +581,7 @@
       }
       .main {
         margin-left: 0;
-        padding-top: 4rem;
+        padding-top: 0;
       }
       .container {
         padding: 0 20px;
@@ -879,4 +888,34 @@
     // Close sidebar on link click (mobile)
     document.querySelectorAll('.sidebar-nav a').forEach(link => {
       link.addEventListener('click', () => {
-        if (window
+        if (window.innerWidth < 768) {
+          sidebar.classList.remove('open');
+          const icon = toggleBtn.querySelector('i');
+          icon.classList.add('fa-bars');
+          icon.classList.remove('fa-times');
+        }
+      });
+    });
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
