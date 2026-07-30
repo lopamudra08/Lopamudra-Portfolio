@@ -1,770 +1,714 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lopamudra Behera - Frontend Developer Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lopamudra Behera · Frontend Developer</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1e40af;
-            --secondary: #8b5cf6;
-            --accent: #ec4899;
-            --dark-bg: #0f172a;
-            --darker-bg: #020617;
-            --card-bg: #1e293b;
-            --text-light: #f1f5f9;
-            --text-muted: #cbd5e1;
-            --border: #334155;
-        }
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-surface: #ffffff;
+      --text-primary: #0b1a33;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --accent-light: #dbeafe;
+      --border-light: #e9edf4;
+      --shadow-card: 0 12px 30px rgba(0, 0, 0, 0.04), 0 4px 10px rgba(0, 0, 0, 0.02);
+      --shadow-hover: 0 20px 40px rgba(37, 99, 235, 0.10), 0 8px 20px rgba(0, 0, 0, 0.04);
+      --radius-card: 20px;
+      --radius-sm: 12px;
+      --transition: 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f35 100%);
-            color: var(--text-light);
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        /* Navigation */
-        nav {
-            position: sticky;
-            top: 0;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(100, 116, 139, 0.3);
-            z-index: 1000;
-            padding: 1rem 2rem;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+    /* ----- NAVIGATION (sticky, glass) ----- */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+      padding: 0.75rem 0;
+    }
 
-        nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
 
-        nav a:hover {
-            color: var(--primary);
-        }
+    .nav-link {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 0.4rem 0.2rem;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+      letter-spacing: -0.01em;
+    }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s;
-        }
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
 
-        nav a:hover::after {
-            width: 100%;
-        }
+    /* ----- HERO ----- */
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      padding: 4rem 0 3rem;
+      position: relative;
+      isolation: isolate;
+    }
 
-        /* Hero Section */
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 3rem 2rem;
-            background: radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 50%);
-            animation: fadeIn 1s ease-in;
-        }
+    .hero-content {
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+    }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .hero-badge {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
 
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: slideUp 0.8s ease-out 0.2s both;
-        }
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.8rem, 9vw, 4.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      background: linear-gradient(145deg, #0b1a33 0%, #1e3a6f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 2.25rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
 
-        .hero-content p {
-            font-size: 1.3rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            animation: slideUp 0.8s ease-out 0.4s both;
-        }
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
 
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: slideUp 0.8s ease-out 0.6s both;
-        }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
 
-        .btn {
-            padding: 0.75rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-            border: 2px solid;
-            cursor: pointer;
-            font-size: 1rem;
-        }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+    }
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.30);
+    }
 
-        .btn-primary {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-        }
+    .btn-outline {
+      background: transparent;
+      color: var(--text-primary);
+      border-color: var(--border-light);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(37, 99, 235, 0.04);
+    }
 
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            border-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
-        }
+    /* ----- SECTION HEADERS ----- */
+    .section {
+      padding: 5rem 0 4rem;
+    }
 
-        .btn-secondary {
-            background: transparent;
-            border-color: var(--primary);
-            color: var(--primary);
-        }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
 
-        .btn-secondary:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
+    .section-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
 
-        /* Sections */
-        section {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
+    .section-header .sub {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 520px;
+      margin: 0.5rem auto 0;
+    }
 
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+    /* ----- ABOUT (two columns) ----- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
 
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
-        }
+    .about-text p {
+      color: var(--text-secondary);
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
 
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
+    .skill-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
 
-        .about-text p {
-            margin-bottom: 1rem;
-            color: var(--text-muted);
-            line-height: 1.8;
-        }
+    .skill-card {
+      background: var(--bg-surface);
+      padding: 1.5rem 1.2rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-light);
+      transition: var(--transition);
+    }
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
+    .skill-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-card);
+    }
 
-        .skill-category {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary);
-        }
+    .skill-card h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+      font-weight: 700;
+    }
 
-        .skill-category h4 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    .skill-card p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
 
-        .skill-category p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
+    /* ----- PROJECTS (card grid) ----- */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
 
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
+    .project-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-card);
+    }
 
-        .project-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow-hover);
+    }
 
-        .project-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
-        }
+    .project-thumb {
+      height: 180px;
+      background: linear-gradient(145deg, #eef2f6, #e2e8f0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.2rem;
+      color: var(--text-muted);
+      position: relative;
+    }
 
-        .project-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
+    .project-thumb i {
+      opacity: 0.5;
+    }
 
-        .project-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="20" fill="white" opacity="0.1"/><circle cx="80" cy="80" r="20" fill="white" opacity="0.1"/></svg>');
-            opacity: 0.5;
-        }
+    .project-body {
+      padding: 1.5rem 1.5rem 1.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .project-content {
-            padding: 1.5rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
+    .project-category {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
 
-        .project-category {
-            font-size: 0.8rem;
-            color: var(--primary);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-        }
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
 
-        .project-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-light);
-        }
+    .project-title a {
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .project-title a:hover {
+      color: var(--accent);
+    }
 
-        .project-description {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-            flex: 1;
-        }
+    .project-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+      flex: 1;
+      line-height: 1.6;
+    }
 
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+    }
 
-        .tech-tag {
-            background: rgba(37, 99, 235, 0.15);
-            color: var(--primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
+    .tech-tag {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.2rem 0.9rem;
+      border-radius: 40px;
+      letter-spacing: 0.2px;
+    }
 
-        /* Experience Section */
-        .timeline {
-            max-width: 800px;
-            margin: 0 auto;
-        }
+    /* ----- EXPERIENCE (timeline) ----- */
+    .timeline {
+      max-width: 800px;
+      margin: 0 auto;
+    }
 
-        .timeline-item {
-            background: var(--card-bg);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary);
-            transition: all 0.3s;
-        }
+    .timeline-item {
+      background: var(--bg-surface);
+      padding: 1.8rem 2rem;
+      border-radius: var(--radius-sm);
+      border-left: 4px solid var(--accent);
+      margin-bottom: 1.8rem;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+    }
 
-        .timeline-item:hover {
-            border-left-color: var(--secondary);
-            transform: translateX(10px);
-        }
+    .timeline-item:hover {
+      transform: translateX(6px);
+      border-left-color: var(--accent-dark);
+    }
 
-        .timeline-date {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-        }
+    .timeline-date {
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
 
-        .timeline-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
+    .timeline-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0.2rem 0 0.1rem;
+    }
 
-        .timeline-company {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
+    .timeline-company {
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
 
-        .timeline-description {
-            color: var(--text-muted);
-            line-height: 1.8;
-        }
+    .timeline-desc {
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
 
-        /* Contact Section */
-        .contact-section {
-            text-align: center;
-            padding: 3rem 2rem;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-            border-radius: 12px;
-            border: 1px solid rgba(100, 116, 139, 0.3);
-        }
+    /* ----- CONTACT ----- */
+    .contact-section {
+      background: var(--bg-surface);
+      border-radius: var(--radius-card);
+      padding: 3.5rem 2.5rem;
+      text-align: center;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-card);
+    }
 
-        .contact-section p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
+    .contact-section p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 450px;
+      margin: 0.5rem auto 2rem;
+    }
 
-        .contact-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            margin-top: 4rem;
-        }
+    /* ----- FOOTER ----- */
+    .footer {
+      border-top: 1px solid var(--border-light);
+      padding: 2.5rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      background: var(--bg-surface);
+      margin-top: 3rem;
+    }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
+    /* ----- RESPONSIVE ----- */
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .skill-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-container {
+        gap: 1.2rem;
+      }
+      .hero {
+        min-height: 70vh;
+        padding: 2rem 0;
+      }
+      .contact-section {
+        padding: 2rem 1.2rem;
+      }
+    }
 
-            .about-content {
-                grid-template-columns: 1fr;
-            }
+    @media (max-width: 480px) {
+      .skill-grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
-            h2 {
-                font-size: 2rem;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            nav ul {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+    /* AOS overrides */
+    [data-aos] {
+      pointer-events: none;
+    }
+    [data-aos].aos-animate {
+      pointer-events: auto;
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <ul>
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <h1>Lopamudra Behera</h1>
-            <p>Frontend Developer | WordPress and Shopify Specialist | UI/UX Enthusiast</p>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
-            </div>
-        </div>
-    </section>
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+  </nav>
 
-    <!-- About Section -->
-    <section id="about">
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="container hero-content">
+      <div class="hero-badge" data-aos="fade-up" data-aos-duration="600">✨ Frontend Developer</div>
+      <h1 data-aos="fade-up" data-aos-delay="100">Lopamudra Behera</h1>
+      <p data-aos="fade-up" data-aos-delay="200">Crafting beautiful, responsive web experiences with WordPress, Shopify, and modern frontend tools.</p>
+      <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
+        <a href="#projects" class="btn btn-primary"><i class="fas fa-arrow-right"></i> View Work</a>
+        <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Let's Talk</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
         <h2>About Me</h2>
-        <p class="section-subtitle">3+ years of crafting beautiful, responsive web experiences</p>
-        
-        <div class="about-content">
-            <div class="about-text">
-                <p>I'm a passionate frontend developer from Bhubaneswar, Odisha, with a strong track record of delivering high-quality websites. My expertise spans modern web technologies and I'm dedicated to creating user-centric solutions that exceed expectations.</p>
-                <p>With experience in HTML, CSS, JavaScript, WordPress, Angular, and more, I've successfully delivered 50+ projects across diverse industries including hospitality, corporate, e-commerce, and wellness.</p>
-                <p>I love collaborating with clients and teams to bring ideas to life, and I'm committed to staying updated with the latest web development trends and best practices.</p>
-            </div>
-
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h4>Frontend</h4>
-                    <p>HTML, CSS, JavaScript, Bootstrap, Responsive Design</p>
-                </div>
-                <div class="skill-category">
-                    <h4>Backend</h4>
-                    <p>PHP, MySQL, WordPress, WooCommerce, Custom Themes</p>
-                </div>
-                <div class="skill-category">
-                    <h4>Platforms</h4>
-                    <p>Shopify, WordPress, Wix, cPanel, hPanel</p>
-                </div>
-                <div class="skill-category">
-                    <h4>Tools & Design</h4>
-                    <p>Figma, Canva, Elementor,Divi, Wp-Bakery, SEO Optimization</p>
-                </div>
-            </div>
+        <p class="sub">3+ years of turning ideas into pixel-perfect digital experiences</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-text" data-aos="fade-right" data-aos-delay="100">
+          <p>I'm a frontend developer based in Bhubaneswar, Odisha, with a passion for clean design and efficient code. I've delivered 50+ websites across hospitality, e‑commerce, corporate, and wellness.</p>
+          <p>From custom WordPress themes to Shopify stores and Angular dashboards, I love collaborating with teams to create solutions that are both beautiful and user‑focused.</p>
+          <p>I continuously explore new tools and best practices to stay ahead in the ever‑evolving web landscape.</p>
         </div>
-    </section>
-
-    <!-- Projects Section -->
-<!-- Projects Section -->
-<section id="projects">
-    <h2>Featured Projects</h2>
-    <p class="section-subtitle">A selection of recent work across various industries</p>
-    
-    <div class="projects-grid">
-
-        <div class="project-card">
-            <div class="project-image">📸</div>
-            <div class="project-content">
-                <div class="project-category">Photography</div>
-                <div class="project-title">
-                    <a href="https://www.rahulmishraphotography.com/" target="_blank">
-                        Rahul Mishra Photography
-                    </a>
-                </div>
-                <p class="project-description">
-                    Professional photography portfolio website showcasing wedding, fashion, and lifestyle photography with elegant gallery layouts.
-                </p>
-                <div class="project-tech">
-                    <span class="tech-tag">WordPress</span>
-                    <span class="tech-tag">Portfolio</span>
-                    <span class="tech-tag">Responsive</span>
-                </div>
-            </div>
+        <div class="skill-grid" data-aos="fade-left" data-aos-delay="150">
+          <div class="skill-card"><h4>Frontend</h4><p>HTML, CSS, JS, Bootstrap, Responsive Design</p></div>
+          <div class="skill-card"><h4>Backend</h4><p>PHP, MySQL, WordPress, WooCommerce</p></div>
+          <div class="skill-card"><h4>Platforms</h4><p>Shopify, Wix, cPanel, hPanel</p></div>
+          <div class="skill-card"><h4>Tools &amp; Design</h4><p>Figma, Canva, Elementor, Divi, SEO</p></div>
         </div>
-
-        <div class="project-card">
-            <div class="project-image">🏍️</div>
-            <div class="project-content">
-                <div class="project-category">Events</div>
-                <div class="project-title">
-                    <a href="https://raigadbikersfest.com/" target="_blank">
-                        Raigad Bikers Fest
-                    </a>
-                </div>
-                <p class="project-description">
-                    Event website for bikers festival featuring event schedules, registration details, sponsors showcase, and engaging visual design.
-                </p>
-                <div class="project-tech">
-                    <span class="tech-tag">Events</span>
-                    <span class="tech-tag">WordPress</span>
-                    <span class="tech-tag">UI Design</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image">🏢</div>
-            <div class="project-content">
-                <div class="project-category">Corporate</div>
-                <div class="project-title">
-                    <a href="https://peallc.com/" target="_blank">
-                        PEA LLC
-                    </a>
-                </div>
-                <p class="project-description">
-                    Corporate business website with professional service presentation, modern layouts, and responsive company branding.
-                </p>
-                <div class="project-tech">
-                    <span class="tech-tag">Business</span>
-                    <span class="tech-tag">Responsive</span>
-                    <span class="tech-tag">WordPress</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image">📈</div>
-            <div class="project-content">
-                <div class="project-category">Finance</div>
-                <div class="project-title">
-                    <a href="https://24algo.us/" target="_blank">
-                        24Algo
-                    </a>
-                </div>
-                <p class="project-description">
-                    Financial and algorithmic trading platform website with modern UI, informative sections, and optimized user experience.
-                </p>
-                <div class="project-tech">
-                    <span class="tech-tag">Finance</span>
-                    <span class="tech-tag">UI/UX</span>
-                    <span class="tech-tag">Web Development</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image">🎨</div>
-            <div class="project-content">
-                <div class="project-category">Creative Agency</div>
-                <div class="project-title">
-                    <a href="https://antistatus.it/" target="_blank">
-                        Antistatus
-                    </a>
-                </div>
-                <p class="project-description">
-                    Creative agency website with bold visuals, interactive layouts, and modern branding to deliver a unique digital experience.
-                </p>
-                <div class="project-tech">
-                    <span class="tech-tag">Creative</span>
-                    <span class="tech-tag">Branding</span>
-                    <span class="tech-tag">Responsive</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image">⛰️</div>
-            <div class="project-content">
-                <div class="project-category">Travel & Tourism</div>
-                <div class="project-title">
-                    <a href="https://www.almightykilimanjaro.co.tz/" target="_blank">
-                        Almighty Kilimanjaro
-                    </a>
-                </div>
-                <p class="project-description">
-                    Tourism and adventure travel website offering trekking packages, safari tours, and destination highlights with immersive visuals.
-                </p>
-                <div class="project-tech">
-                    <span class="tech-tag">Travel</span>
-                    <span class="tech-tag">Tourism</span>
-                    <span class="tech-tag">Responsive</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image">🏭</div>
-            <div class="project-content">
-                <div class="project-category">Industrial</div>
-                <div class="project-title">
-                    <a href="https://www.supersteel.in/" target="_blank">
-                        Super Steel
-                    </a>
-                </div>
-                <p class="project-description">
-                    Industrial manufacturing website showcasing steel products, company capabilities, and modern business presentation.
-                </p>
-                <div class="project-tech">
-                    <span class="tech-tag">Industrial</span>
-                    <span class="tech-tag">Corporate</span>
-                    <span class="tech-tag">WordPress</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-card">
-    <div class="project-image">🎨</div>
-    <div class="project-content">
-        <div class="project-category">Shopify eCommerce</div>
-        <div class="project-title">
-            <a href="https://homesweethamptonsminiatures.com/" target="_blank">
-                Zelina Hair Studios
-            </a>
-        </div>
-        <p class="project-description">
-            Shopify-based online store specializing in hair extension products with responsive layouts, product collection management, secure checkout, and a seamless shopping experience across desktop and mobile devices.
-        </p>
-        <div class="project-tech">
-            <span class="tech-tag">Shopify</span>
-            <span class="tech-tag">Liquid</span>
-            <span class="tech-tag">Responsive Design</span>
-        </div>
+      </div>
     </div>
-</div>
+  </section>
 
+  <!-- PROJECTS -->
+  <section id="projects" class="section" style="background: var(--bg-surface);">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <h2>Featured Projects</h2>
+        <p class="sub">A selection of recent work across diverse industries</p>
+      </div>
+      <div class="project-grid">
+        <!-- card 1 -->
+        <div class="project-card" data-aos="fade-up" data-aos-delay="50">
+          <div class="project-thumb"><i class="fas fa-camera"></i></div>
+          <div class="project-body">
+            <span class="project-category">Photography</span>
+            <div class="project-title"><a href="https://www.rahulmishraphotography.com/" target="_blank">Rahul Mishra Photography</a></div>
+            <p class="project-desc">Elegant portfolio for wedding, fashion, and lifestyle photography with immersive gallery layouts.</p>
+            <div class="tech-tags"><span class="tech-tag">WordPress</span><span class="tech-tag">Portfolio</span></div>
+          </div>
+        </div>
+        <!-- card 2 -->
+        <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="project-thumb"><i class="fas fa-motorcycle"></i></div>
+          <div class="project-body">
+            <span class="project-category">Events</span>
+            <div class="project-title"><a href="https://raigadbikersfest.com/" target="_blank">Raigad Bikers Fest</a></div>
+            <p class="project-desc">Dynamic event site with schedules, sponsor showcases, and registration flow for bikers festival.</p>
+            <div class="tech-tags"><span class="tech-tag">Events</span><span class="tech-tag">WordPress</span></div>
+          </div>
+        </div>
+        <!-- card 3 -->
+        <div class="project-card" data-aos="fade-up" data-aos-delay="150">
+          <div class="project-thumb"><i class="fas fa-building"></i></div>
+          <div class="project-body">
+            <span class="project-category">Corporate</span>
+            <div class="project-title"><a href="https://peallc.com/" target="_blank">PEA LLC</a></div>
+            <p class="project-desc">Professional corporate website with modern service presentation and responsive branding.</p>
+            <div class="tech-tags"><span class="tech-tag">Business</span><span class="tech-tag">WordPress</span></div>
+          </div>
+        </div>
+        <!-- card 4 -->
+        <div class="project-card" data-aos="fade-up" data-aos-delay="50">
+          <div class="project-thumb"><i class="fas fa-chart-line"></i></div>
+          <div class="project-body">
+            <span class="project-category">Finance</span>
+            <div class="project-title"><a href="https://24algo.us/" target="_blank">24Algo</a></div>
+            <p class="project-desc">Algorithmic trading platform UI with clear info architecture and optimized user experience.</p>
+            <div class="tech-tags"><span class="tech-tag">UI/UX</span><span class="tech-tag">Web</span></div>
+          </div>
+        </div>
+        <!-- card 5 -->
+        <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="project-thumb"><i class="fas fa-paint-brush"></i></div>
+          <div class="project-body">
+            <span class="project-category">Creative Agency</span>
+            <div class="project-title"><a href="https://antistatus.it/" target="_blank">Antistatus</a></div>
+            <p class="project-desc">Bold, interactive agency site with unique visual identity and modern branding.</p>
+            <div class="tech-tags"><span class="tech-tag">Creative</span><span class="tech-tag">Responsive</span></div>
+          </div>
+        </div>
+        <!-- card 6 -->
+        <div class="project-card" data-aos="fade-up" data-aos-delay="150">
+          <div class="project-thumb"><i class="fas fa-mountain"></i></div>
+          <div class="project-body">
+            <span class="project-category">Travel &amp; Tourism</span>
+            <div class="project-title"><a href="https://www.almightykilimanjaro.co.tz/" target="_blank">Almighty Kilimanjaro</a></div>
+            <p class="project-desc">Adventure travel site showcasing trekking packages, safari tours, and immersive visuals.</p>
+            <div class="tech-tags"><span class="tech-tag">Travel</span><span class="tech-tag">Tourism</span></div>
+          </div>
+        </div>
+        <!-- card 7 -->
+        <div class="project-card" data-aos="fade-up" data-aos-delay="50">
+          <div class="project-thumb"><i class="fas fa-industry"></i></div>
+          <div class="project-body">
+            <span class="project-category">Industrial</span>
+            <div class="project-title"><a href="https://www.supersteel.in/" target="_blank">Super Steel</a></div>
+            <p class="project-desc">Manufacturing website with product catalog, company capabilities, and corporate presentation.</p>
+            <div class="tech-tags"><span class="tech-tag">Industrial</span><span class="tech-tag">WordPress</span></div>
+          </div>
+        </div>
+        <!-- card 8 -->
+        <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="project-thumb"><i class="fas fa-store"></i></div>
+          <div class="project-body">
+            <span class="project-category">Shopify eCommerce</span>
+            <div class="project-title"><a href="https://homesweethamptonsminiatures.com/" target="_blank">Zelina Hair Studios</a></div>
+            <p class="project-desc">Shopify store for hair extensions with product collection, secure checkout, and responsive design.</p>
+            <div class="tech-tags"><span class="tech-tag">Shopify</span><span class="tech-tag">Liquid</span></div>
+          </div>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-    <!-- Experience Section -->
-    <section id="experience">
+  <!-- EXPERIENCE -->
+  <section id="experience" class="section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
         <h2>Work Experience</h2>
-        <p class="section-subtitle">My professional journey in web development</p>
-        
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-date">May 2025 – July 2026</div>
-                <div class="timeline-title">Associate Web Developer</div>
-                <div class="timeline-company">Algopage IT Solutions Pvt. Ltd., Bhubaneswar</div>
-                <div class="timeline-description">
-                    Building innovative web solutions and contributing to cutting-edge projects.
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-date">Dec 2024 – May 2025</div>
-                <div class="timeline-title">WordPress Developer</div>
-                <div class="timeline-company">Credencesoft Pvt. Ltd., Bhubaneswar</div>
-                <div class="timeline-description">
-                    Delivered 15+ WordPress and WooCommerce websites. Built dynamic Angular websites for hotel clients. Managed deployments via hPanel and cPanel. Conducted client meetings for tailored solutions.
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-date">Jan 2024 – Oct 2024</div>
-                <div class="timeline-title">Web Developer</div>
-                <div class="timeline-company">Zebaq Pvt. Ltd., Bhubaneswar</div>
-                <div class="timeline-description">
-                    Developed 15+ responsive websites using HTML, CSS, JavaScript, PHP, MySQL, and Bootstrap. Led development team ensuring timely delivery. Implemented SEO strategies for improved visibility.
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-date">Sep 2023 – Dec 2023</div>
-                <div class="timeline-title">Web Development Intern</div>
-                <div class="timeline-company">Zebaq Pvt. Ltd., Bhubaneswar</div>
-                <div class="timeline-description">
-                    Learned and built web pages using HTML, CSS, JavaScript. Worked with WordPress and Bootstrap on real-time client projects.
-                </div>
-            </div>
+        <p class="sub">My professional journey in web development</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="50">
+          <div class="timeline-date">May 2025 – July 2026</div>
+          <div class="timeline-title">Associate Web Developer</div>
+          <div class="timeline-company">Algopage IT Solutions Pvt. Ltd., Bhubaneswar</div>
+          <div class="timeline-desc">Building innovative web solutions and contributing to cutting-edge projects.</div>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="contact-section">
-            <h2>Let's Work Together</h2>
-            <p>I'm always interested in hearing about new projects and opportunities.</p>
-            <div class="contact-buttons">
-                <a href="mailto:lopamudra699@gmail.com" class="btn btn-primary">Email Me</a>
-                <a href="tel:+918280760699" class="btn btn-secondary">Call Me</a>
-            </div>
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="timeline-date">Dec 2024 – May 2025</div>
+          <div class="timeline-title">WordPress Developer</div>
+          <div class="timeline-company">Credencesoft Pvt. Ltd., Bhubaneswar</div>
+          <div class="timeline-desc">Delivered 15+ WordPress/WooCommerce sites. Built Angular hotel sites. Managed deployments via cPanel.</div>
         </div>
-    </section>
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="150">
+          <div class="timeline-date">Jan 2024 – Oct 2024</div>
+          <div class="timeline-title">Web Developer</div>
+          <div class="timeline-company">Zebaq Pvt. Ltd., Bhubaneswar</div>
+          <div class="timeline-desc">Developed 15+ responsive websites using HTML, CSS, JS, PHP, MySQL. Led team and implemented SEO.</div>
+        </div>
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="timeline-date">Sep 2023 – Dec 2023</div>
+          <div class="timeline-title">Web Development Intern</div>
+          <div class="timeline-company">Zebaq Pvt. Ltd., Bhubaneswar</div>
+          <div class="timeline-desc">Built web pages with HTML, CSS, JavaScript, WordPress, and Bootstrap on real client projects.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Lopamudra Behera. All rights reserved. | Frontend Developer | Bhubaneswar, Odisha</p>
-    </footer>
+  <!-- CONTACT -->
+  <section id="contact" class="section" style="background: var(--bg-surface);">
+    <div class="container">
+      <div class="contact-section" data-aos="fade-up" data-aos-delay="50">
+        <h2 style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 2rem;">Let's Work Together</h2>
+        <p>Have a project in mind? I'd love to hear about it.</p>
+        <div class="contact-buttons">
+          <a href="mailto:lopamudra699@gmail.com" class="btn btn-primary"><i class="fas fa-envelope"></i> Email Me</a>
+          <a href="tel:+918280760699" class="btn btn-outline"><i class="fas fa-phone-alt"></i> Call Me</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Lopamudra Behera · Frontend Developer · Bhubaneswar, Odisha</p>
+    </div>
+  </footer>
 
-        // Add scroll animation for elements
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 700,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 30,
+      disable: window.innerWidth < 768 ? true : false
+    });
 
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+    // smooth scroll for nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+        }
+      });
+    });
 
-        document.querySelectorAll('.project-card, .timeline-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease-out';
-            observer.observe(el);
-        });
-    </script>
+    // update active nav on scroll
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
